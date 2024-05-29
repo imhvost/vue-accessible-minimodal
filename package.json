@@ -1,0 +1,52 @@
+{
+  "name": "vue-accessible-minimodal",
+  "version": "1.0",
+  "description": "Accessible, lightweight, stylish Vue.js modal library",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imhvost/vue-accessible-minimodal"
+  },
+  "keywords": [
+    "vue modal component",
+    "vue modal",
+    "modal",
+    "dialog",
+    "accessible modal",
+    "lightweight modal",
+    "stylish modal",
+    "javascript modal",
+    "typescript modal",
+    "multiple modal"
+  ],
+  "author": "imhvost <imhvost@gmail.com> (https://imhvost.top/)",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/vue-accessible-minimodal.umd.cjs",
+  "module": "./dist/vue-accessible-minimodal.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-accessible-minimodal.js",
+      "require": "./dist/vue-accessible-minimodal.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "accessible-minimodal": "latest"
+  },
+  "devDependencies": {
+    "vue": "^3.4.21",
+    "@types/node": "^20.12.13",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vue-tsc": "^2.0.6"
+  }
+}
