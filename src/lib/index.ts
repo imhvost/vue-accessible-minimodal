@@ -1,4 +1,4 @@
-import type { App, InjectionKey } from 'vue';
+import type { App, InjectionKey, Ref } from 'vue';
 import { AccessibleMinimodal as Modal } from 'accessible-minimodal';
 import type {
   AccessibleMinimodalSettings,
@@ -28,7 +28,17 @@ export const AccessibleMinimodal = {
   },
 };
 
-export const useModal = () => {
+interface UseModal {
+  openModal: AccessibleMinimodalType['openModal'];
+  closeModal: AccessibleMinimodalType['closeModal'];
+  closeAllModals: AccessibleMinimodalType['closeAllModals'];
+  getScrollbarWidth: AccessibleMinimodalType['getScrollbarWidth'];
+  addTriggers: AccessibleMinimodalType['addTriggers'];
+  animated: Ref<AccessibleMinimodalType['animated']>;
+  modal: Modal;
+}
+
+export const useModal = (): UseModal => {
   const modal = inject(modalInject, {} as AccessibleMinimodalType);
 
   const openModal = modal.openModal.bind(modal);
@@ -55,13 +65,6 @@ export const useModal = () => {
     modal,
   };
 };
-
-export interface Props {
-  id: string;
-  hideCloseBtn?: boolean;
-  resetStyles?: boolean;
-  valign?: 'top' | 'bottom' | 'center';
-}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {
