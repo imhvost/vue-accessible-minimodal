@@ -17,6 +17,13 @@ const props = withDefaults(defineProps<Props>(), {
   zIndex: () => 600,
 });
 
+const emit = defineEmits([
+  'before-open',
+  'before-close',
+  'after-open',
+  'before-close',
+]);
+
 const isUseStyle = computed(() => {
   return config.style?.use ? false : !props.customStyle;
 });
@@ -65,6 +72,11 @@ const transform = computed(() => {
     :style="{
       'z-index': zIndex,
     }"
+    ref="modalRef"
+    @accessible-minimodal:before-open="emit('before-open', $event)"
+    @accessible-minimodal:before-close="emit('before-close', $event)"
+    @accessible-minimodal:after-open="emit('after-open', $event)"
+    @accessible-minimodal:after-close="emit('before-open', $event)"
   >
     <div
       tabindex="-1"

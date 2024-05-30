@@ -1,6 +1,6 @@
 {
   "name": "vue-accessible-minimodal",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Accessible, lightweight, stylish Vue.js modal library",
   "repository": {
     "type": "git",
@@ -26,13 +26,14 @@
   ],
   "main": "./dist/vue-accessible-minimodal.umd.cjs",
   "module": "./dist/vue-accessible-minimodal.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/lib/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/lib/index.d.ts",
       "import": "./dist/vue-accessible-minimodal.js",
       "require": "./dist/vue-accessible-minimodal.umd.cjs"
-    }
+    },
+    "./style.css": "./dist/style.css"
   },
   "scripts": {
     "dev": "vite",

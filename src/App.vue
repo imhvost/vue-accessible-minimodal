@@ -1,7 +1,18 @@
 <script setup lang="ts">
 import { useModal } from './lib';
+import { onMounted } from 'vue';
 
-const { closeModal, animated, modal } = useModal();
+const { openModal, closeModal, animated, modal } = useModal();
+
+onMounted(() => {
+  openModal('test');
+  console.log(modal);
+});
+
+const beforeOpen = ($event: Event) => {
+  $event.preventDefault();
+  console.log($event);
+};
 </script>
 
 <template>
@@ -19,6 +30,7 @@ const { closeModal, animated, modal } = useModal();
     asd
   </button>
   <AccessibleMinimodal
+    @before-open="beforeOpen"
     valign="top"
     id="test"
   >
