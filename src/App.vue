@@ -10,7 +10,7 @@ onMounted(() => {
 });
 
 const beforeOpen = ($event: Event) => {
-  $event.preventDefault();
+  // $event.preventDefault();
   console.log($event);
 };
 </script>
