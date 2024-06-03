@@ -56,8 +56,8 @@ interface Props {
 <AccessibleMinimodal
   id="my-modal"
   @before-open="myBeforeOpenFunction"
+  @after-open="myAfterOpenFunction"
   @before-close="myBeforeCloseFunction"
-  @before-close="myBeforeOpenFunction"
   @after-close="myAfterCloseFunction"
 >
 </AccessibleMinimodal>
@@ -72,21 +72,29 @@ Behave the same as [accessible-minimodel events](https://github.com/imhvost/acce
 import { useModal } from './lib';
 import { onMounted } from 'vue';
 
-const { openModal, closeModal, closeAllModals, animated, modal, getScrollbarWidth, addTriggers } = useModal();
+const {
+  openModal,
+  closeModal,
+  closeAllModals,
+  animated,
+  modal,
+  getScrollbarWidth,
+  addTriggers
+} = useModal();
 
 onMounted(() => {
   openModal('my-modal'); // open modal with id="my-modal"
 });
 
-const myBeforeOpenFunction = ($event: Event) => {
-  // $event.preventDefault(); - prevent model open
+const myBeforeCloseFunction = ($event: Event) => {
+  // $event.preventDefault(); - prevent modal close
 };
 </script>
 
 <template>
   <AccessibleMinimodal
     id="my-modal"
-    @before-open="myBeforeOpenFunction"
+    @before-open="myBeforeCloseFunction"
   >
   </AccessibleMinimodal>
 </template>
