@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { computed, inject } from 'vue';
+import { computed, inject, ref } from 'vue';
 import { configInject } from '../lib';
 
 export interface Props {
-  id: string;
+  id?: string;
   closeBtn?: boolean;
   valign?: 'top' | 'bottom' | 'center';
   zIndex?: number | string;
   customStyle?: boolean;
+  closeBtnAriaLabel?: string;
 }
 
 const config = inject(configInject, {});
@@ -15,13 +16,14 @@ const config = inject(configInject, {});
 const props = withDefaults(defineProps<Props>(), {
   closeBtn: () => true,
   zIndex: () => 600,
+  closeBtnAriaLabel: () => '🗙',
 });
 
 const emit = defineEmits([
   'before-open',
   'before-close',
   'after-open',
-  'before-close',
+  'after-close',
 ]);
 
 const isUseStyle = computed(() => {
@@ -62,21 +64,27 @@ const transform = computed(() => {
       return `translateY(var(--accessible-minimodal-translate))`;
   }
 });
+
+const modalEl = ref<HTMLElement>();
+
+defineExpose({
+  modalEl,
+});
 </script>
 
 <template>
   <div
+    ref="modalEl"
     :id="id"
     aria-hidden="true"
     :class="[id, config.classes?.modal, isUseStyle && 'modal-component']"
     :style="{
       'z-index': zIndex,
     }"
-    ref="modalRef"
     @accessible-minimodal:before-open="emit('before-open', $event)"
     @accessible-minimodal:before-close="emit('before-close', $event)"
     @accessible-minimodal:after-open="emit('after-open', $event)"
-    @accessible-minimodal:after-close="emit('before-open', $event)"
+    @accessible-minimodal:after-close="emit('after-close', $event)"
   >
     <div
       tabindex="-1"
@@ -94,12 +102,30 @@ const transform = computed(() => {
             config.classes?.closeBtn,
             isUseStyle && 'modal-component-close-btn',
           ]"
-          :data-modal-close="id"
-          aria-label="🗙"
+          :data-modal-close="id ?? ''"
+          aria-label=""
         >
-          <slot name="closeBtn"></slot>
+          <slot name="close"></slot>
         </button>
+        <div
+          v-if="$slots.header"
+          class="modal-header"
+        >
+          <slot name="header"></slot>
+        </div>
+        <div
+          v-if="$slots.content"
+          class="modal-content"
+        >
+          <slot name="content"></slot>
+        </div>
         <slot></slot>
+        <div
+          v-if="$slots.footer"
+          class="modal-footer"
+        >
+          <slot name="footer"></slot>
+        </div>
       </div>
     </div>
   </div>

@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { useModal } from './lib';
 import { onMounted } from 'vue';
+import { ref } from 'vue';
 
 const { openModal, closeModal, animated, modal } = useModal();
 
+const modalEl = ref();
+
 onMounted(() => {
-  openModal('test');
+  // openModal(modalEl.value);
+  console.log(modalEl.value);
+
+  openModal(modalEl.value.modalEl);
   console.log(modal);
 });
 
@@ -32,10 +38,11 @@ const beforeOpen = ($event: Event) => {
   <AccessibleMinimodal
     @before-open="beforeOpen"
     valign="top"
-    id="test"
+    ref="modalEl"
   >
+    <template #close>Close</template>
     test<br />
-    <button @click="closeModal('test')">close</button>
+    <button @click="closeModal()">close</button>
     <button data-modal-close-all>close-all</button>
   </AccessibleMinimodal>
   <AccessibleMinimodal
