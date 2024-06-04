@@ -38,6 +38,7 @@ Options - this is a [accessible-minimodal](https://github.com/imhvost/accessible
 interface Props {
   id?: string;
   closeBtn?: boolean;
+  closeBtnAriaLabel?: string;
   valign?: 'top' | 'bottom' | 'center';
   zIndex?: number | string;
   customStyle?: boolean;
