@@ -42,6 +42,7 @@ interface Props {
   valign?: 'top' | 'bottom' | 'center';
   zIndex?: number | string;
   customStyle?: boolean;
+  ariaHidden?: boolean;
 }
 ```
 
@@ -51,6 +52,7 @@ interface Props {
 - **`valign`** - How to vertical align a modal window (`'top' | 'bottom' | 'center'`, default: `center`);
 - **`zIndex`** - Modal `z-index` (default: `600`);
 - **`customStyle`** - Whether to reset all default styles (default: `false`).
+- **`ariaHidden`** - `aria-hidden` modal attribute (default: `true`).
 
 #### Component Events
 

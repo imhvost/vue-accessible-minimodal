@@ -9,6 +9,7 @@ export interface Props {
   zIndex?: number | string;
   customStyle?: boolean;
   closeBtnAriaLabel?: string;
+  ariaHidden?: boolean;
 }
 
 const config = inject(configInject, {});
@@ -17,6 +18,7 @@ const props = withDefaults(defineProps<Props>(), {
   closeBtn: () => true,
   zIndex: () => 600,
   closeBtnAriaLabel: () => '🗙',
+  ariaHidden: () => true,
 });
 
 const emit = defineEmits([
@@ -76,7 +78,7 @@ defineExpose({
   <div
     ref="modalEl"
     :id="id"
-    aria-hidden="true"
+    :aria-hidden="ariaHidden"
     :class="[id, config.classes?.modal, isUseStyle && 'modal-component']"
     :style="{
       'z-index': zIndex,
@@ -131,7 +133,7 @@ defineExpose({
   </div>
 </template>
 
-<style scoped>
+<style>
 .modal-component {
   --accessible-minimodal-color: #333;
   --accessible-minimodal-bg: #fff;
